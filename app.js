@@ -9,12 +9,11 @@ var rows = 9;
 var columns = 9;
 
 // creates variable to keep track of the score--variable starts at 0
-var score = 0;
+let score = 0;
 
 // creates drag variables
 var currTile;
 var otherTile;
-
 
 window.onload = function() {
     startGame();
@@ -22,9 +21,10 @@ window.onload = function() {
     //1/10th of a second
     window.setInterval(function(){
         crushCandy();
+        //resetScore();
         slideCandy();
         generateCandy();
-    }, 100);
+    });
 }
 
 // creates a random candy function that displays the candy images in a random fashion
@@ -132,6 +132,7 @@ function crushCandy() {
 
 function crushThree() {
     //check rows
+
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < columns-2; c++) {
             let candy1 = board[r][c];
@@ -215,3 +216,5 @@ function generateCandy() {
         }
     }
 }
+
+// Issues to solve: Score doesn't reset at 0 because when the game is loaded, the board is randomly generated, and the code is constantly checking if candy pieces could be crushed. Therefore if the board loads with 3 candies in a row in some places, those will be crushed.
