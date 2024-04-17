@@ -18,6 +18,9 @@ b) Open index.html in your browser to play or
 c) Open the directory in your text editor of choice to view or edit the code
 
 # How it Works
+This game was built using HTML, CSS and Javascript. I initially created the home page(html) and styled (CSS) it before building the actual gameplay in JavaScript.
+
+
 
 # Future Considerations
 
