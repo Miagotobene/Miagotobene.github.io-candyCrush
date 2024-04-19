@@ -94,24 +94,8 @@ To generate a valid move, a validMoves array containing the ids of the divs is c
         } else  squares[squareIdBeingDragged].style.backgroundImage = colorBeingDragged; // if square being dragged has nowhere to go return it to its main position
     }
 ```
+Finally, when a move is valid, the functions below check to see if the move results in matches of 3 or 4 candies either by row or column. When a match is found after the functions are ran, the player scores 3 or 4 points depending on whether they matched a set of 3 candies or 4 candies.
 ```js
-//drop candies once some have been cleared
-    function moveIntoSquareBelow() {
-        for (i = 0; i < 55; i ++) {
-            if(squares[i + width].style.backgroundImage === '') {
-                squares[i + width].style.backgroundImage = squares[i].style.backgroundImage
-                squares[i].style.backgroundImage = ''
-                const firstRow = [0, 1, 2, 3, 4, 5, 6, 7]
-                const isFirstRow = firstRow.includes(i)
-                if (isFirstRow && (squares[i].style.backgroundImage === '')) {
-                  let randomColor = Math.floor(Math.random() * candyColors.length)
-                  squares[i].style.backgroundImage = candyColors[randomColor]
-                }
-            }
-        }
-    }
-    
-    
     ///Checking for Matches
     //for row of Four
       function checkRowForFour() {
