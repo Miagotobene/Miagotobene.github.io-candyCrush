@@ -17,18 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
     //create your board
     function createBoard() {
       for (let i = 0; i < width*width; i++) {
-        const square = document.createElement('div')
-        square.setAttribute('draggable', true)
-        square.setAttribute('id', i)
-        let randomColor = Math.floor(Math.random() * candyColors.length)
-        square.style.backgroundImage = candyColors[randomColor]
-        grid.appendChild(square)
-        squares.push(square)
+        const square = document.createElement('div');
+        square.setAttribute('draggable', true);
+        square.setAttribute('id', i);
+        let randomColor = Math.floor(Math.random() * candyColors.length);
+        square.style.backgroundImage = candyColors[randomColor];
+        grid.appendChild(square);
+        squares.push(square);
       }
     }
     createBoard()
     
-    // Dragging the Candy
+    // Dragging the Candy, if event is triggered -> run functions below
     let colorBeingDragged
     let colorBeingReplaced
     let squareIdBeingDragged
@@ -41,14 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
     squares.forEach(square => square.addEventListener('drageleave', dragLeave))
     squares.forEach(square => square.addEventListener('drop', dragDrop))
     
+  // returns the id of the element being listened to
     function dragStart(){
         colorBeingDragged = this.style.backgroundImage
         squareIdBeingDragged = parseInt(this.id)
-        // this.style.backgroundImage = ''
     }
     
     function dragOver(e) {
-        e.preventDefault()
+        e.preventDefault() // prevent candy from it
     }
     
     function dragEnter(e) {
@@ -56,14 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function dragLeave() {
-        this.style.backgroundImage = ''
+        this.style.backgroundImage = '';
     }
     
-    function dragDrop() {
-        colorBeingReplaced = this.style.backgroundImage
-        squareIdBeingReplaced = parseInt(this.id)
-        this.style.backgroundImage = colorBeingDragged
-        squares[squareIdBeingDragged].style.backgroundImage = colorBeingReplaced
+    function dragDrop() { // drags square/candy drops it unto a new one, and change original candy into the color of the square being replaced
+        colorBeingReplaced = this.style.backgroundImage;
+        squareIdBeingReplaced = parseInt(this.id);
+        this.style.backgroundImage = colorBeingDragged;
+        squares[squareIdBeingDragged].style.backgroundImage = colorBeingReplaced;
     }
     
     function dragEnd() {
@@ -71,12 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let validMoves = [squareIdBeingDragged -1 , squareIdBeingDragged -width, squareIdBeingDragged +1, squareIdBeingDragged +width]
         let validMove = validMoves.includes(squareIdBeingReplaced)
     
-        if (squareIdBeingReplaced && validMove) {
-            squareIdBeingReplaced = null
-        }  else if (squareIdBeingReplaced && !validMove) {
-           squares[squareIdBeingReplaced].style.backgroundImage = colorBeingReplaced
-           squares[squareIdBeingDragged].style.backgroundImage = colorBeingDragged
-        } else  squares[squareIdBeingDragged].style.backgroundImage = colorBeingDragged
+        if (squareIdBeingReplaced && validMove) { // if the id of the square being replaced exists and if move is valid
+            squareIdBeingReplaced = null; // clear the value of square being replaced
+        }  else if (squareIdBeingReplaced && !validMove) { //
+           squares[squareIdBeingReplaced].style.backgroundImage = colorBeingReplaced;
+           squares[squareIdBeingDragged].style.backgroundImage = colorBeingDragged;
+        } else  squares[squareIdBeingDragged].style.backgroundImage = colorBeingDragged; // if square being dragged has nowhere to go return it to its main position
     }
     
     //drop candies once some have been cleared
