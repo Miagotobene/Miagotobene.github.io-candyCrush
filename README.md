@@ -175,8 +175,3 @@ Finally, when a move is valid, the functions below check to see if the move resu
       }
     checkColumnForThree()
 ```
-
-
-
-# Future Considerations
-
